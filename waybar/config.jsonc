@@ -1,0 +1,92 @@
+// Read 'man waybar' for a complete reference
+{
+	"layer": "top",
+	"height": 30,
+	"margin-top": 10,
+	"margin-bottom": 0,
+	"margin-right": 10,
+	"margin-left": 10,
+	"spacing": 10,
+	"reload_style_on_change": true,
+
+	"modules-left": [
+		"custom/icon",
+		"sway/workspaces"
+	],
+
+	"modules-right": [
+		"network",
+		"pulseaudio",
+		"cpu",
+		"custom/gpu",
+		"disk",
+		"tray",
+		"clock"
+	],
+
+	"custom/icon": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"format": "{name}",
+		"disable-click": true,
+		"disable-scroll": true
+	},
+
+	"network": {
+		"format-wifi": " ",
+		"format-ethernet": " ",
+		"format-linked": " ",
+		"format-disconnected": " ",
+		"tooltip-format": "{ipaddr}/{cidr} via {gwaddr}"
+	},
+
+	"pulseaudio": {
+		"format": "{volume} {icon} {format_source}",
+		"format-bluetooth": "{volume} {icon} {format_source}",
+		"format-source": "{volume} ",
+		"format-muted": " {format_source}",
+		"format-source-muted": "",
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle; pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%",
+		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+		"format-icons": {
+			"headphone": "",
+			"default": ["", "", ""]
+		},
+		"tooltip": false
+	},
+
+	"cpu": {
+		"interval": 1,
+		"format": "{load} "
+	},
+
+	"custom/gpu": {
+		"exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
+		"format": "{}% ",
+		"return-type": "",
+		"interval": 1,
+		"tooltip": false
+	},
+
+	"disk": {
+		"interval": 30,
+		"format": "{percentage_used}%  ",
+		"tooltip-format": "{used}/{total}"
+	},
+
+	"tray": {
+		"icon-size": 15,
+		"show-passive-items": true,
+		"spacing": 7
+	},
+
+	"clock": {
+		"interval": 60,
+		"format": "{:%H:%M}",
+		"tooltip": false
+	}
+}
