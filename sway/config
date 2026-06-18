@@ -12,8 +12,6 @@ set $up k
 set $right l
 # Terminal emulator
 set $term foot
-# Application launcher
-set $menu rofi -show drun | xargs swaymsg exec --
 # Background image
 set $img /usr/share/wallpapers/wallhaven.jpg
 # Lockscreen
@@ -51,7 +49,11 @@ output * {
 }
 
 ### Input configuration
-input * xkb_layout us
+input * {
+    xkb_layout us,ro
+    xkb_variant ,std
+    xkb_options grp:win_space_toggle
+}
 
 ### Audio configuration
     # Volume control via WirePlumber
@@ -71,9 +73,6 @@ input * xkb_layout us
 
     # Kill focused window
     bindsym $mod+F4 kill
-
-    # Start your launcher
-    bindsym Super_L exec $menu
 
     # Drag floating windows ($mod + left mouse button) and resize them ($mod + right mouse button)
     floating_modifier $mod normal
