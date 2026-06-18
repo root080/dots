@@ -14,6 +14,10 @@ set $right l
 set $term foot
 # Application launcher
 set $menu rofi -show drun | xargs swaymsg exec --
+# Background image
+set $img /usr/share/wallpapers/wallhaven.jpg
+# Lockscreen
+set $lock swaylock -f --indicator-idle-visible --image $img
 
 ### Appearance
 # Window corner radius in px
@@ -39,11 +43,10 @@ dim_inactive_colors.urgent 900000FF
 # Get outputs: swaymsg -t get_outputs
 output * {
     # Background image
-    #bg /usr/share/wallpapers/iusearchbtw.png fill
-    bg /usr/share/wallpapers/wallhaven.jpg fill
+    bg $img fill
     # Fixed refresh rate
     adaptive_sync off
-    # Set frequency to 165Hz
+    # Set resolution and frequency
     resolution 2560x1440@165Hz
 }
 
@@ -158,8 +161,12 @@ input * xkb_layout us
 # Take screenshot
 bindsym Print exec grim ~/screenshot.png
 
+# Lock screen
+bindsym Ctrl+Alt+l exec $lock
+bindswitch lid:on exec $lock
+
 # Enable XWayland
-#xwayland enable
+xwayland enable
 
 # Status Bar
 bar swaybar_command waybar
